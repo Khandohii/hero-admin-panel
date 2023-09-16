@@ -12,18 +12,19 @@ import Spinner from '../spinner/Spinner';
 // Удаление идет и с json файла при помощи метода DELETE
 
 const HeroesList = () => {
-    const {heroes, heroesLoadingStatus} = useSelector(state => state);
+    const {heroes, heroesLoadingStatus, activeFilter} = useSelector(state => state);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
     useEffect(() => {
         dispatch(heroesFetching());
-        request("http://localhost:3001/heroes")
+        const path = activeFilter === 'all' ? '' : `?element=${activeFilter}`;
+        request(`http://localhost:3001/heroes${path}`)
             .then(data => dispatch(heroesFetched(data)))
             .catch(() => dispatch(heroesFetchingError()))
 
         // eslint-disable-next-line
-    }, []);
+    }, [activeFilter]);
 
     if (heroesLoadingStatus === "loading") {
         return <Spinner/>;

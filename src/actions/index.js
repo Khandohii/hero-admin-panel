@@ -30,3 +30,29 @@ export const heroAdding = (hero) => {
         payload: hero
     }
 }
+
+export const filtersFetching = () => {
+    return {
+        type: 'FILTERS_FETCHING'
+    }
+}
+
+export const filtersFetched = (filters) => {
+    return {
+        type: 'FILTERS_FETCHED',
+        payload: filters
+    }
+}
+
+export const filtersFetchingError = () => {
+    return {
+        type: 'FILTERS_FETCHING_ERROR'
+    }
+}
+
+export const activateFilter = (filter) => {
+    return {
+        type: 'ACTIVATE_FILTER',
+        payload: filter
+    }
+}
