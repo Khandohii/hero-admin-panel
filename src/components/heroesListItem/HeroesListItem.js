@@ -43,7 +43,6 @@ const HeroesListItem = ({id, name, description, element}) => {
                     onClick={() => {
                         dispatch(heroDelete(id));
                         request(`http://localhost:3001/heroes/${id}`, 'DELETE')
-                            .then(data => console.log(data))
                     }}
                 >
 
