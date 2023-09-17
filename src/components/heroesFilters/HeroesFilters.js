@@ -9,7 +9,8 @@
 import {useHttp} from '../../hooks/http.hook';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { filtersFetched, filtersFetching, filtersFetchingError, activateFilter } from '../../actions';
+import { filtersFetched, filtersFetching, filtersFetchingError, activeFilterChanged } from '../../actions';
+import classNames from 'classnames';
 import Spinner from '../spinner/Spinner';
 
 const HeroesFilters = () => {
@@ -24,7 +25,7 @@ const HeroesFilters = () => {
                 dispatch(filtersFetched(data))
             })
             .catch(() => dispatch(filtersFetchingError()))
-
+            
         // eslint-disable-next-line
     }, []);
 
@@ -34,46 +35,29 @@ const HeroesFilters = () => {
         return <h5 className="text-center mt-5">Ошибка загрузки</h5>
     }
 
-    const renderFiltersList = (arr, activeFilter) => {
+    const renderFilters = (arr) => {
         if (arr.length === 0) {
             return <h5 className="text-center mt-5">There aren't filters yet...</h5>
         }
-        const activeFilt = activeFilter;
         
-        return arr.map((item) => {
-            let elementClassName, label;
-            let activeFilter = item === activeFilt ? 'active' : null;
-            switch (item) {
-                case 'all':
-                    elementClassName = 'btn-outline-dark';
-                    label = 'Все';
-                    break;
-                case 'fire':
-                    elementClassName = 'bg-danger';
-                    label = 'Огонь';
-                    break;
-                case 'water':
-                    elementClassName = 'bg-primary';
-                    label = 'Вода';
-                    break;
-                case 'wind':
-                    elementClassName = 'bg-success';
-                    label = 'Ветер';
-                    break;
-                case 'earth':
-                    elementClassName = 'bg-secondary';
-                    label = 'Земля';
-                    break;
-                default:
-                    elementClassName = 'bg-warning';
-                    label = 'Error';
-            }
+        return arr.map(({name, className, label}) => {
+
+            const btnClass = classNames('btn', className, {
+                'active': name === activeFilter
+            });
             
-            return <button onClick={() => dispatch(activateFilter(item))} key={item} className={`btn ${elementClassName} ${activeFilter}`}>{label}</button>
+            return <button 
+                    key={name} 
+                    id={name} 
+                    className={btnClass}
+                    onClick={() => dispatch(activeFilterChanged(name))}
+                    >
+                        {label}
+                    </button>
         })
     }
 
-    const elements = renderFiltersList(filters, activeFilter);
+    const elements = renderFilters(filters);
 
     return (
         <div className="card shadow-lg mt-4">
