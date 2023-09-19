@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from "react-redux";
-import { heroCreated } from "../heroesList/heroesSlise";
+import { heroCreated } from "../heroesList/heroesSlice";
 import { useHttp } from "../../hooks/http.hook";
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать

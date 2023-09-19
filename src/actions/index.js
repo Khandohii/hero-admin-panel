@@ -1,5 +1,5 @@
 
-import { heroesFetching, heroesFetched, heroesFetchingError } from "../components/heroesList/heroesSlise";
+import { heroesFetching, heroesFetched, heroesFetchingError } from "../components/heroesList/heroesSlice";
 import { filtersFetching, filtersFetched, filtersFetchingError } from "../components/heroesFilters/filtersSlice";
 
 export const fetchHeroes = (request) => (dispatch) => {
