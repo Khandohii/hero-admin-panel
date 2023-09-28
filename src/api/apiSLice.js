@@ -1,9 +1,11 @@
 
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
+
+const path = 'https://my-json-server.typicode.com/Khandohii/hero-panel-admin-database';
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3001'}),
+    baseQuery: fetchBaseQuery({baseUrl: path}),
     tagTypes: ['Heroes'],
     endpoints: (builder) => ({
         getHeroes: builder.query({

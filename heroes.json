@@ -29,6 +29,12 @@
       "name": "adgad",
       "description": "adgadg",
       "element": "water"
+    },
+    {
+      "id": "a3256d09-75bc-4484-8ab0-0b7f5ad49786",
+      "name": "My hero",
+      "description": "111adg",
+      "element": "fire"
     }
   ],
   "filters": [
