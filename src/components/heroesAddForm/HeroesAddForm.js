@@ -21,16 +21,13 @@ const HeroesAddForm = () => {
 
     const renderFilters = (filters, status) => {
         if (status === "loading") {
-            return <option>Загрузка элементов</option>
+            return <option>Loading elements</option>
         } else if (status === "error") {
-            return <option>Ошибка загрузки</option>
+            return <option>Error loading</option>
         }
         
-        // Если фильтры есть, то рендерим их
         if (filters && filters.length > 0 ) {
             return filters.map(({name, label}) => {
-                // Один из фильтров нам тут не нужен
-                // eslint-disable-next-line
                 if (name === 'all')  return;
 
                 return <option key={name} value={name}>{label}</option>
@@ -55,7 +52,7 @@ const HeroesAddForm = () => {
                         .min(5, 'Mininum 5 symbols'),
 
                 element: Yup.string()
-                        .required('Choose skill'),
+                        .required('Choose a skill'),
     
             })}
             
@@ -66,7 +63,7 @@ const HeroesAddForm = () => {
         >
             <Form className="border p-4 shadow-lg rounded">
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label fs-4">Имя нового героя</label>
+                    <label htmlFor="name" className="form-label fs-4">Name of a new hero</label>
 
                     <Field
                         id="name"
@@ -74,20 +71,20 @@ const HeroesAddForm = () => {
                         className="form-control" 
                         required
                         type="text" 
-                        placeholder="Как меня зовут?"
+                        placeholder="What is my name?"
                     />
                     <ErrorMessage className='text-danger mt-1' name='name' component='div'/>
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="description" className="form-label fs-4">Описание</label>
+                    <label htmlFor="description" className="form-label fs-4">Description</label>
 
                     <Field
                         required
                         name="description" 
                         className="form-control" 
                         id="description" 
-                        placeholder="Что я умею?"
+                        placeholder="What can I do?"
                         style={{"height": '130px'}}
                         as="textarea"
                     />
@@ -95,7 +92,7 @@ const HeroesAddForm = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="element" className="form-label">Выбрать элемент героя</label>
+                    <label htmlFor="element" className="form-label">Choose hero element</label>
                     <Field
                         required
                         className="form-select" 
@@ -103,13 +100,13 @@ const HeroesAddForm = () => {
                         name="element"
                         as="select"
                         >
-                            <option value="">Я владею элементом...</option>
+                            <option value="">I own the element...</option>
                             {renderFilters(filters, filtersLoadingStatus)}
                     </Field>
                     <ErrorMessage className='text-danger mt-1' name='element' component='div'/>
                 </div>
 
-                <button type="submit" className="btn btn-primary">Создать</button>
+                <button type="submit" className="btn btn-primary">Create</button>
             </Form>
         </Formik>
     )
